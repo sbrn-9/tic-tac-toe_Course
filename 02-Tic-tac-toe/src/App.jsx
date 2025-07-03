@@ -1,38 +1,45 @@
+import { Children } from "react"
+
 const TURN = {
   X: 'x',
   O: 'o',
 }
 
-const board = Array(9).fill(null)
+const Square = ({children, updateBoard, index}) => {
+  return(
+    <div className="square">
+    {children}
+    </div>
+
+  )
+}
 
 function App() {
 
+  const board = Array(9).fill(null)
+
   return (
-    <>
-      <h1>Ta-te-ti</h1>
-
+    
       <main className="board">
-
+        <h1>Tic Tac Toe</h1>
+        
         <section className="game">
           {
             board.map((_ , index) => {
               return (
-                <button
-                  key={index}
-                  className="square"
-                  onClick={() => {
-                    console.log(`Clicked square ${index}`)
-                  }}
+                <Square
+                  key={index} 
+                  index={index} 
                 >
-                  { /* Render the current player's symbol here */ }
-                </button>
+                 
+                </Square>
               )
             })  
           }
         </section>
 
       </main>
-    </>
+    
   )
 }
  
