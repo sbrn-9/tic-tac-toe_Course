@@ -56,6 +56,7 @@ function App() {
     [0, 4, 8],
     [2, 4, 6],
     //este es el nuevo comentario
+    // [0, 1, 2],
   ]
   
   return (
