@@ -56,6 +56,11 @@ export default  function App() {
     return null // Si no hay ganador, retorna null
   }
 
+  const checkEndGame = (newBoard) => {
+    // Verifica si todos los cuadrados están ocupados y no hay ganador
+    return newBoard.every(square => square !== null)
+  }
+
   // Función para actualizar el tablero y cambiar el turno
   const updateBoard = (index) => {
 
@@ -76,6 +81,10 @@ export default  function App() {
     const newWinner = checkWinner(newBoard)
     if (newWinner) {
       setWinner(newWinner) // Si hay un ganador, se actualiza el estado del ganador
+    }
+    else if (checkEndGame(newBoard)) {
+      setWinner(false) // Si no hay ganador y el juego termina en empate, se actualiza el estado del ganador a false
+
     }
   }
 
@@ -107,6 +116,36 @@ export default  function App() {
             })  
           }
         </section>
+        
+        {
+          winner !== null && (
+            <section className="winner">
+              <div className="text">
+                <h2>
+                  {
+                    winner === false 
+                      ? 'Empate' 
+                      : `Ganó: ${winner.toUpperCase()}`
+                  }
+                </h2>
+
+                <header className="win">
+                  {winner && <Square>{winner}</Square>}
+                </header>
+
+                <footer>
+                  <button onClick={() => {
+                    setBoard(Array(9).fill(null))
+                    setTurn(TURN.X)
+                    setWinner(null)
+                  }}>
+                    Empezar de nuevo
+                  </button>
+                </footer>
+              </div>
+            </section>
+          )
+        }
 
       </main>
     
