@@ -1,38 +1,7 @@
 import { useState } from 'react'
-
-
-const TURN = {
-  X: 'x',
-  O: 'o',
-}
-
-const Square = ({children, isSelected, updateBoard, index}) => {
-  
-  const className = `square ${isSelected ? 'is-selected' : ''}`
-  
-  const handleClick = () => {
-    updateBoard(index)
-  }
-
-  return(
-    <div onClick={handleClick} className={className}>
-    {children}
-    </div>
-
-  )
-}
-
-const WINER_COMBOS = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-    
-  ]
+import Square from './components/Square'
+import { TURN, WINNER_COMBOS } from './const/Const'
+import WinnerSection from './components/WinnerSection'
 
 // Componente principal de la aplicación
 
@@ -46,7 +15,7 @@ export default  function App() {
 
   // Función para verificar si hay un ganador
   const checkWinner = (newBoard) => {
-    for (const combo of WINER_COMBOS) {
+    for (const combo of WINNER_COMBOS) {
       const [a, b, c] = combo
       // Verifica si los cuadrados a, b y c tienen el mismo valor y no son nulos
       if (newBoard[a] && newBoard[a] === newBoard[b] && newBoard[a] === newBoard[c]) {
@@ -117,35 +86,12 @@ export default  function App() {
           }
         </section>
         
-        {
-          winner !== null && (
-            <section className="winner">
-              <div className="text">
-                <h2>
-                  {
-                    winner === false 
-                      ? 'Empate' 
-                      : `Ganó: ${winner.toUpperCase()}`
-                  }
-                </h2>
-
-                <header className="win">
-                  {winner && <Square>{winner}</Square>}
-                </header>
-
-                <footer>
-                  <button onClick={() => {
-                    setBoard(Array(9).fill(null))
-                    setTurn(TURN.X)
-                    setWinner(null)
-                  }}>
-                    Empezar de nuevo
-                  </button>
-                </footer>
-              </div>
-            </section>
-          )
-        }
+        <WinnerSection
+          winner={winner}
+          setBoard={setBoard}
+          setTurn={setTurn}
+          setWinner={setWinner}
+        />
 
       </main>
     
