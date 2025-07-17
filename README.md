@@ -1,1 +1,5 @@
-# tic-tac-toe_Course
+# Curso de react: Tateti 
+
+- Inicio del juego
+
+<img src= "./"/>

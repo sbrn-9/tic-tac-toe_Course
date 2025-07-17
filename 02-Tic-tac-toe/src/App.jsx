@@ -63,7 +63,7 @@ export default  function App() {
   return (
     
       <main className="board">
-        <h1>Tic Tac Toe</h1>
+        <h1>Ta te ti</h1>
         
          <section className="turn">
           <Square isSelected={turn === TURN.X}>{TURN.X}</Square>
